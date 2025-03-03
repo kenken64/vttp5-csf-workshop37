@@ -5,6 +5,16 @@
             <td><input type="file" (change)="onFileChange($event)" accept="image/png"/></td>
         </tr>
         <tr>
+            <td>
+                <mat-select [(value)]="selectedCity">
+                    <!-- Use *ngFor to iterate over the list of cities -->
+                    <mat-option *ngFor="let cityItem of (citiesList$ | async) let i = index;" [value]="cityItem.code">
+                      {{ cityItem.city_name }}
+                    </mat-option>
+                  </mat-select>
+            </td>
+        </tr>
+        <tr>
             <input matInput type="text" size="30" formControlName="comments" placeholder="comments" />
         </tr>
         <tr>

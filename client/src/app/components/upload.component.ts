@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FileuploadService } from '../services/fileupload.service';
+import { db } from '../shared/app.db';
+import { liveQuery } from 'dexie';
 
 @Component({
   selector: 'app-upload',
@@ -13,6 +15,8 @@ export class UploadComponent implements OnInit{
   form!: FormGroup;
   dataUri!: string;
   blob!: Blob;
+  citiesList$:any;
+  selectedCity!: string;
 
   constructor(private router:Router, private fb:FormBuilder, private fileuploadService:FileuploadService) {
 
@@ -20,6 +24,7 @@ export class UploadComponent implements OnInit{
 
   ngOnInit(): void {
     this.createForm();
+    this.loadCities();
   }
 
   onFileChange(event: Event){
@@ -68,6 +73,11 @@ export class UploadComponent implements OnInit{
     this.form = this.fb.group({
       comments: this.fb.control<string>('')
     });
+  }
+
+  loadCities(){
+    this.citiesList$ = liveQuery(() => db.cities
+      .reverse().toArray());
   }
 
 }
