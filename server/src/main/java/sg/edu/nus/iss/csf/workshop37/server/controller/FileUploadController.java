@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.csf.workshop36.server.controller;
+package sg.edu.nus.iss.csf.workshop37.server.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,12 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
-import sg.edu.nus.iss.csf.workshop36.server.models.Post;
-import sg.edu.nus.iss.csf.workshop36.server.services.FileUploadService;
+import sg.edu.nus.iss.csf.workshop37.server.models.Post;
+import sg.edu.nus.iss.csf.workshop37.server.services.FileUploadService;
 
 @Controller
 public class FileUploadController {
     private static final String BASE64_PREFIX = "data:image/png;base64,";
+
     @Autowired
     private FileUploadService fileUploadService;
 

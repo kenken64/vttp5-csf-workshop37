@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.csf.workshop36.server.models;
+package sg.edu.nus.iss.csf.workshop37.server.models;
 
 import java.io.Serializable;
 import java.sql.ResultSet;

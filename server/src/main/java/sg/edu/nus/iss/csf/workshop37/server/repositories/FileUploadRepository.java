@@ -1,21 +1,16 @@
-package sg.edu.nus.iss.csf.workshop36.server.repositories;
+package sg.edu.nus.iss.csf.workshop37.server.repositories;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.UUID;
-
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import sg.edu.nus.iss.csf.workshop36.server.models.Post;
+import sg.edu.nus.iss.csf.workshop37.server.models.Post;
 
 @Repository
 public class FileUploadRepository {
@@ -28,23 +23,28 @@ public class FileUploadRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private DataSource dataSource; 
-
-    public String upload(MultipartFile file, String comments) 
-        throws SQLException, IOException{
-        try(Connection con = dataSource.getConnection();
-            PreparedStatement ps = con.prepareStatement(INSERT_POST)) {
-            String postId = UUID.randomUUID()
-                        .toString().replace("-","")
-                        .substring(0,8);
-            System.out.println(postId);
-            ps.setString(1, postId);
-            ps.setString(2, comments);
-            ps.setBytes(3, file.getBytes());
-            ps.executeUpdate();
-            return postId;
-        } 
+    public String upload(MultipartFile file, String comments) {
+        // Generate a unique postId
+        String postId = UUID.randomUUID().toString().replace("-", "").substring(0, 8);
+        System.out.println(postId);
+    
+        try {
+            // Attempt to read the file bytes
+            byte[] fileBytes = file.getBytes();
+    
+            // Use JdbcTemplate to perform the update
+            jdbcTemplate.update(INSERT_POST, ps -> {
+                ps.setString(1, postId);
+                ps.setString(2, comments);
+                ps.setBytes(3, fileBytes);
+            });
+        } catch (IOException e) {
+            // Handle the IOException here (e.g., log it or rethrow a custom exception)
+            // For example:
+            throw new RuntimeException("Failed to upload file content", e);
+        }
+    
+        return postId;
     }
 
     public Optional<Post> getPostById(String postId) {

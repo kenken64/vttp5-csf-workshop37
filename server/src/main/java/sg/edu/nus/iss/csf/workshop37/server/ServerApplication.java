@@ -1,4 +1,4 @@
-package sg.edu.nus.iss.csf.workshop36.server;
+package sg.edu.nus.iss.csf.workshop37.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

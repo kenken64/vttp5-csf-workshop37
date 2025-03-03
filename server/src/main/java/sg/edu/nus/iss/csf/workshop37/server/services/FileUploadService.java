@@ -1,6 +1,5 @@
-package sg.edu.nus.iss.csf.workshop36.server.services;
+package sg.edu.nus.iss.csf.workshop37.server.services;
 
-import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -9,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import sg.edu.nus.iss.csf.workshop36.server.models.Post;
-import sg.edu.nus.iss.csf.workshop36.server.repositories.FileUploadRepository;
+import sg.edu.nus.iss.csf.workshop37.server.models.Post;
+import sg.edu.nus.iss.csf.workshop37.server.repositories.FileUploadRepository;
 
 @Service
 public class FileUploadService {
