@@ -17,6 +17,10 @@ ng serve --proxy-config proxy-config.js
 
 ```
 
+```
+npm i dexie
+```
+
 #### Server 
 
 ```
