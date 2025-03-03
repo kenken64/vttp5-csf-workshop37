@@ -1,24 +1,44 @@
-<form [formGroup]="form">
-
-    <table>
-        <tr>
-            <td><input type="file" (change)="onFileChange($event)" accept="image/png"/></td>
-        </tr>
-        <tr>
-            <td>
-                <mat-select [(value)]="selectedCity">
-                    <!-- Use *ngFor to iterate over the list of cities -->
-                    <mat-option *ngFor="let cityItem of (citiesList$ | async) let i = index;" [value]="cityItem.code">
-                      {{ cityItem.city_name }}
-                    </mat-option>
-                  </mat-select>
-            </td>
-        </tr>
-        <tr>
-            <input matInput type="text" size="30" formControlName="comments" placeholder="comments" />
-        </tr>
-        <tr>
-            <button mat-raised-button color="primary" (click)="upload()">Upload</button>
-        </tr>
-    </table>
-</form>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <!-- Limit card to a max width -->
+    <mat-card style="width: 100%; max-width: 400px;">
+      <mat-card-title style="text-align: center;">File Upload Form</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form" style="display: flex; flex-direction: column; gap: 16px;">
+  
+          <!-- File Input (cannot use matInput for file) -->
+          <label for="fileInput">Upload a PNG</label>
+          <input 
+            id="fileInput" 
+            type="file" 
+            (change)="onFileChange($event)" 
+            accept="image/png" 
+          />
+  
+          <!-- Dropdown -->
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Select a City</mat-label>
+            <mat-select [(value)]="selectedCity">
+              <mat-option 
+                *ngFor="let cityItem of (citiesList$ | async)" 
+                [value]="cityItem.code"
+              >
+                {{ cityItem.city_name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+          <!-- Text field -->
+          <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-label>Comments</mat-label>
+            <input matInput type="text" formControlName="comments" placeholder="comments" />
+          </mat-form-field>
+  
+          <!-- Upload button -->
+          <button mat-raised-button color="primary" (click)="upload()">
+            Upload
+          </button>
+  
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
