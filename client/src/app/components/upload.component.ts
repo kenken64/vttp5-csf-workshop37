@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { FileuploadService } from '../services/fileupload.service';
 import { db } from '../shared/app.db';
 import { liveQuery } from 'dexie';
+import { CityStore } from '../stores/city.store';
+import { Observable } from 'rxjs';
+import { City } from '../model/city';
 
 @Component({
     selector: 'app-upload',
@@ -16,10 +19,12 @@ export class UploadComponent implements OnInit{
   form!: FormGroup;
   dataUri!: string;
   blob!: Blob;
-  citiesList$:any;
+  //citiesList$:any;
+  citiesList$!: Observable<City[]>;
   selectedCity!: string;
 
-  constructor(private router:Router, private fb:FormBuilder, private fileuploadService:FileuploadService) {
+  constructor(private router:Router, private fb:FormBuilder, 
+      private fileuploadService:FileuploadService, private cityStore: CityStore) {
 
   }
 
@@ -77,8 +82,12 @@ export class UploadComponent implements OnInit{
   }
 
   loadCities(){
-    this.citiesList$ = liveQuery(() => db.cities
-      .reverse().toArray());
+    // connect to the selector
+    this.citiesList$ = this.cityStore.cities$;
+    //load the cities
+    // Initiate loading of todos
+    this.cityStore.loadCities();
+    console.log(this.citiesList$)
   }
 
 }

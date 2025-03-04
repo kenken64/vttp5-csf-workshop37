@@ -3,18 +3,17 @@ import { City } from '../model/city';
 
 
 export class AppDB extends Dexie {
-    cities!: Table<City, number>;
+    cities!: Table<City, string>;
   
     constructor() {
         super('fileupload');
-        this.version(1).stores({
-        cities: '++id, code'
+        this.version(2).stores({
+        cities: 'code, city_name'
         });
     }
 
     async addCity(item: City) {
-        const cityListId = await db.cities.add(item);
-        console.log(cityListId)
+        await db.cities.put(item);
     }
 }
 
