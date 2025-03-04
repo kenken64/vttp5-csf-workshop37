@@ -6,9 +6,10 @@ import { db } from '../shared/app.db';
 import { liveQuery } from 'dexie';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrl: './upload.component.css'
+    selector: 'app-upload',
+    templateUrl: './upload.component.html',
+    styleUrl: './upload.component.css',
+    standalone: false
 })
 export class UploadComponent implements OnInit{
 

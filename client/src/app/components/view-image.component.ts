@@ -4,9 +4,10 @@ import { FileuploadService } from '../services/fileupload.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-view-image',
-  templateUrl: './view-image.component.html',
-  styleUrl: './view-image.component.css'
+    selector: 'app-view-image',
+    templateUrl: './view-image.component.html',
+    styleUrl: './view-image.component.css',
+    standalone: false
 })
 export class ViewImageComponent implements OnInit, OnDestroy {
   postId="";
