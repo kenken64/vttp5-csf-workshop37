@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FileuploadService } from '../services/fileupload.service';
 import { Subscription } from 'rxjs';
 
@@ -15,7 +15,8 @@ export class ViewImageComponent implements OnInit, OnDestroy {
   imageData: any;
 
   constructor(private actRoute:ActivatedRoute, 
-        private fileuploadService:FileuploadService) {
+        private fileuploadService:FileuploadService,
+        private router:Router) {
   }
 
   ngOnInit(): void {
@@ -29,7 +30,12 @@ export class ViewImageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.param$.unsubscribe();
+    if(this.param$ != null)
+      this.param$.unsubscribe();
   }
 
+  goBack(){
+    console.log("go back !")
+    this.router.navigate(['']);
+  }
 }

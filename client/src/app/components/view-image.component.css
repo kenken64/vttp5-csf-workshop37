@@ -1,0 +1,4 @@
+.full-width-btn {
+    display: block; /* or inline-block – as long as width is allowed */
+    width: 100%;
+  }

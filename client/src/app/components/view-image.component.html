@@ -1,9 +1,26 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <mat-card style="max-width: 400px; width: 100%;">
+    <mat-card style="max-width: 640px; width: 100%;">
       <mat-card-title style="text-align: center;">Image Preview</mat-card-title>
       <mat-card-content style="display: flex; justify-content: center;">
-        <!-- Bind to [src]="imageData" if imageData is a property in your component -->
-        <img [src]="imageData" alt="Preview" style="max-width: 100%; height: auto;">
+        <table>
+            <tr>
+                <td>
+                    <!-- Bind to [src]="imageData" if imageData is a property in your component -->
+                    <img [src]="imageData" alt="Preview" style="max-width: 100%; height: auto;">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <!-- Upload button -->
+                    <button mat-raised-button color="primary" class="full-width-btn" (click)="goBack()">
+                        Back
+                    </button>
+                </td>
+            </tr>
+        </table>
+        
+        
       </mat-card-content>
     </mat-card>
+    
 </div>
